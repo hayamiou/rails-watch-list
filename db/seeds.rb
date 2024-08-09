@@ -1,17 +1,405 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+Movie.destroy_all
 
-Movie.create(title: "Wonder Woman 1984", overview: "Wonder Woman comes into conflict with the Soviet Union during the Cold War in the 1980s", poster_url: "https://image.tmdb.org/t/p/original/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg", rating: 6.9)
+movies = [
+    {"title": "Game of Thrones",
+    "overview": "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond.",
+    "poster_url": "https://www.themoviedb.org/t/p/w1280/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg",
+    "rating": 8.453,
+    },
+    {"overview": "Raymond Red Reddington, one of the FBI's most wanted fugitives, surrenders in person at FBI Headquarters in Washington, D.C. He claims that he and the FBI have the same interests: bringing down dangerous criminals and terrorists. In the last two decades, he's made a list of criminals and terrorists that matter the most but the FBI cannot find because it does not know they exist. Reddington calls this \"The Blacklist\". Reddington will co-operate, but insists that he will speak only to Elizabeth Keen, a rookie FBI profiler.",
+      "popularity": 705.406,
+      "poster_url": "https://www.themoviedb.org/t/p/w1280/r935SMphvXppx5bJjbIBNx02fwc.jpg",
+      "first_air_date": "2013-09-23",
+      "title": "The Blacklist",
+      "rating": 7.62,
+      "vote_count": 3086
+    },
+    {
+      "adult": false,
+      "backdrop_url": "https://www.themoviedb.org/t/p/w1280/7sqFEDDmK1hG5m92upolcfQxy7R.jpg",
+      "genre_ids": [
+        10759,
+        10765,
+        18
+      ],
+      "id": 75006,
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_title": "The Umbrella Academy",
+      "overview": "A dysfunctional family of superheroes comes together to solve the mystery of their father's death, the threat of the apocalypse and more.",
+      "popularity": 689.137,
+      "poster_url": "https://www.themoviedb.org/t/p/w1280/qhcwrnnCnN8NE1N6XXKHFmveJR9.jpg",
+      "first_air_date": "2019-02-15",
+      "title": "The Umbrella Academy",
+      "rating": 8.568,
+      "vote_count": 9243
+    },
+    {
+      "adult": false,
+      "backdrop_url": "https://www.themoviedb.org/t/p/w1280/suzHOUQwRYq76MGk62v5pJIqCyi.jpg",
+      "genre_ids": [
+        18
+      ],
+      "id": 39269,
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_title": "Scandal",
+      "overview": "Everyone has secrets and Olivia Pope has dedicated her life to protecting and defending the public images of the elite by keeping those secrets under wraps. Pope and her team are at the top of their game when it comes to getting the job done for their clients, but it becomes apparent that these \"gladiators in suits,\" who specialize in fixing the lives of other people, have trouble fixing those closest at hand -- their own.",
+      "popularity": 650.75,
+      "poster_url": "https://www.themoviedb.org/t/p/w1280/4XmF8PMSqtHCGNoL15oHbjr5ZuO.jpg",
+      "first_air_date": "2012-04-05",
+      "title": "Scandal",
+      "rating": 7.149,
+      "vote_count": 525
+    },
+    {
+      "adult": false,
+      "backdrop_url": "https://www.themoviedb.org/t/p/w1280/lHe8iwM4Cdm6RSEiara4PN8ZcBd.jpg",
+      "genre_ids": [
+        10759,
+        18,
+        10768
+      ],
+      "id": 44217,
+      "origin_country": [
+        "CA"
+      ],
+      "original_language": "en",
+      "original_title": "Vikings",
+      "overview": "The adventures of Ragnar Lothbrok, the greatest hero of his age. The series tells the sagas of Ragnar's band of Viking brothers and his family, as he rises to become King of the Viking tribes. As well as being a fearless warrior, Ragnar embodies the Norse traditions of devotion to the gods. Legend has it that he was a direct descendant of Odin, the god of war and warriors.",
+      "popularity": 645.382,
+      "poster_url": "https://www.themoviedb.org/t/p/w1280/bQLrHIRNEkE3PdIWQrZHynQZazu.jpg",
+      "first_air_date": "2013-03-03",
+      "title": "Vikings",
+      "rating": 8.092,
+      "vote_count": 6785
+    },
+    {
+      "adult": false,
+      "backdrop_url": "https://www.themoviedb.org/t/p/w1280/iprMfJ9VHS4wMhBXyHtN7l9d2hP.jpg",
+      "genre_ids": [
+        80,
+        18,
+        9648
+      ],
+      "id": 1405,
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_title": "Dexter",
+      "overview": "Dexter Morgan, a blood spatter pattern analyst for the Miami Metro Police also leads a secret life as a serial killer, hunting down criminals who have slipped through the cracks of justice.",
+      "popularity": 636.527,
+      "poster_url": "https://www.themoviedb.org/t/p/w1280/q8dWfc4JwQuv3HayIZeO84jAXED.jpg",
+      "first_air_date": "2006-10-01",
+      "title": "Dexter",
+      "rating": 8.2,
+      "vote_count": 4120
+    },
+    {
+      "adult": false,
+      "backdrop_url": "https://www.themoviedb.org/t/p/w1280/wwxWx59rewDeoAy2UjgwH7Tkk2A.jpg",
+      "genre_ids": [
+        80,
+        18,
+        35
+      ],
+      "id": 79744,
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_title": "The Rookie",
+      "overview": "Starting over isn’t easy, especially for small-town guy John Nolan who, after a life-altering incident, is pursuing his dream of being an LAPD officer. As the force’s oldest rookie, he’s met with skepticism from some higher-ups who see him as just a walking midlife crisis.",
+      "popularity": 630.409,
+      "poster_url": "https://www.themoviedb.org/t/p/w1280/wbeqBUFydztHDQ4h7dZqnknh5HE.jpg",
+      "first_air_date": "2018-10-16",
+      "title": "The Rookie",
+      "rating": 8.433,
+      "vote_count": 1908
+    },
+    {
+      "adult": false,
+      "backdrop_url": "https://www.themoviedb.org/t/p/w1280/9faGSFi5jam6pDWGNd0p8JcJgXQ.jpg",
+      "genre_ids": [
+        18,
+        80
+      ],
+      "id": 1396,
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_title": "Breaking Bad",
+      "overview": "Walter White, a New Mexico chemistry teacher, is diagnosed with Stage III cancer and given a prognosis of only two years left to live. He becomes filled with a sense of fearlessness and an unrelenting desire to secure his family's financial future at any cost as he enters the dangerous world of drugs and crime.",
+      "popularity": 598.74,
+      "poster_url": "https://www.themoviedb.org/t/p/w1280/ztkUQFLlC19CCMYHW9o1zWhJRNq.jpg",
+      "first_air_date": "2008-01-20",
+      "title": "Breaking Bad",
+      "rating": 8.914,
+      "vote_count": 13951
+    },
+    {
+      "adult": false,
+      "backdrop_url": "https://www.themoviedb.org/t/p/w1280/nO7EzksrBzlNpAg5rgv8HzaBIkx.jpg",
+      "genre_ids": [
+        35
+      ],
+      "id": 1421,
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_title": "Modern Family",
+      "overview": "The Pritchett-Dunphy-Tucker clan is a wonderfully large and blended family. They give us an honest and often hilarious look into the sometimes warm, sometimes twisted, embrace of the modern family.",
+      "popularity": 582.348,
+      "poster_url": "https://www.themoviedb.org/t/p/w1280/klL4yhwiU8aF4AuF5dCfJA9sRnS.jpg",
+      "first_air_date": "2009-09-23",
+      "title": "Modern Family",
+      "rating": 7.85,
+      "vote_count": 2687
+    },
+    {
+      "adult": false,
+      "backdrop_url": "https://www.themoviedb.org/t/p/w1280/aDBRtunw49UF4XmqfyNuD9nlYIu.jpg",
+      "genre_ids": [
+        80,
+        10765
+      ],
+      "id": 63174,
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_title": "Lucifer",
+      "overview": "Bored and unhappy as the Lord of Hell, Lucifer Morningstar abandoned his throne and retired to Los Angeles, where he has teamed up with LAPD detective Chloe Decker to take down criminals. But the longer he's away from the underworld, the greater the threat that the worst of humanity could escape.",
+      "popularity": 516.901,
+      "poster_url": "https://www.themoviedb.org/t/p/w1280/ekZobS8isE6mA53RAiGDG93hBxL.jpg",
+      "first_air_date": "2016-01-25",
+      "title": "Lucifer",
+      "rating": 8.5,
+      "vote_count": 14493
+    },
+    {
+      "adult": false,
+      "backdrop_url": "https://www.themoviedb.org/t/p/w1280/netPctcZmTb1yW0xhxMgY1zVj3q.jpg",
+      "genre_ids": [
+        35,
+        18
+      ],
+      "id": 61418,
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_title": "Jane the Virgin",
+      "overview": "A comedy-drama following a chaste young woman who is accidentally impregnated via artificial insemination as she struggles to inform her devoutly religious family and make the right choices concerning the child. Based on the telenovela \"Juana la virgen.\"",
+      "popularity": 327.962,
+      "poster_url": "https://www.themoviedb.org/t/p/w1280/DRRHgvsNEfBloMgIP8bBw4zi4E.jpg",
+      "first_air_date": "2014-10-13",
+      "title": "Jane the Virgin",
+      "rating": 7.91,
+      "vote_count": 826
+    },
+    {
+      "adult": false,
+      "backdrop_url": "https://www.themoviedb.org/t/p/w1280/bFVx0ydejF6NE8SEAVz95ns0o6A.jpg",
+      "genre_ids": [
+        18,
+        35
+      ],
+      "id": 34307,
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_title": "Shameless",
+      "overview": "Chicagoan Frank Gallagher is the proud single dad of six smart, industrious, independent kids, who without him would be... perhaps better off. When Frank's not at the bar spending what little money they have, he's passed out on the floor. But the kids have found ways to grow up in spite of him. They may not be like any family you know, but they make no apologies for being exactly who they are.",
+      "popularity": 552.017,
+      "poster_url": "https://www.themoviedb.org/t/p/w1280/9akij7PqZ1g6zl42DQQTtL9CTSb.jpg",
+      "first_air_date": "2011-01-09",
+      "title": "Shameless",
+      "rating": 8.157,
+      "vote_count": 2629
+    },
+    {
+      "adult": false,
+      "backdrop_url": "https://www.themoviedb.org/t/p/w1280/wiE9doxiLwq3WCGamDIOb2PqBqc.jpg",
+      "genre_ids": [
+        18,
+        80
+      ],
+      "id": 60574,
+      "origin_country": [
+        "GB"
+      ],
+      "original_language": "en",
+      "original_title": "Peaky Blinders",
+      "overview": "A gangster family epic set in 1919 Birmingham, England and centered on a gang who sew razor blades in the peaks of their caps, and their fierce boss Tommy Shelby, who means to move up in the world.",
+      "popularity": 538.121,
+      "poster_url": "https://www.themoviedb.org/t/p/w1280/vUUqzWa2LnHIVqkaKVlVGkVcZIW.jpg",
+      "first_air_date": "2013-09-12",
+      "title": "Peaky Blinders",
+      "rating": 8.538,
+      "vote_count": 9716
+    },
+    {
+      "adult": false,
+      "backdrop_url": "https://www.themoviedb.org/t/p/w1280/33Al50uZ9cZSddklcuHTaHmNxeE.jpg",
+      "genre_ids": [
+        10765,
+        10759,
+        35
+      ],
+      "id": 114924,
+      "origin_country": [
+        "NZ",
+        "GB",
+        "US"
+      ],
+      "original_language": "en",
+      "original_title": "Time Bandits",
+      "overview": "Eleven-year-old Kevin's passion for history is put to the test when he joins a ragtag group of time-traveling thieves on a high-stakes and hilarious adventure.",
+      "popularity": 530.722,
+      "poster_url": "https://www.themoviedb.org/t/p/w1280/ahnTuygdAbjXvLKzLQlK2txosMX.jpg",
+      "first_air_date": "2024-07-23",
+      "title": "Time Bandits",
+      "rating": 5.875,
+      "vote_count": 40
+    },
+    {
+      "adult": false,
+      "backdrop_url": "https://www.themoviedb.org/t/p/w1280/peENvis00Fkw27KLFuaoWsu0YnD.jpg",
+      "genre_ids": [
+        10765,
+        18
+      ],
+      "id": 79680,
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_title": "Snowpiercer",
+      "overview": "More than seven years after the world has become a frozen wasteland, the remnants of humanity inhabit a gigantic, perpetually-moving train that circles the globe as class warfare, social injustice and the politics of survival play out.",
+      "popularity": 513.117,
+      "poster_url": "https://www.themoviedb.org/t/p/w1280/exKzfiKzMdQBHrdd7zNmKauJkbg.jpg",
+      "first_air_date": "2020-05-17",
+      "title": "Snowpiercer",
+      "rating": 7.403,
+      "vote_count": 1179
+    },
+    {
+      "adult": false,
+      "backdrop_url": "https://www.themoviedb.org/t/p/w1280/tdlHJ8KoOd9UgUygCWQ3fKRNkAR.jpg",
+      "genre_ids": [
+        18
+      ],
+      "id": 91239,
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_title": "Bridgerton",
+      "overview": "Wealth, lust, and betrayal set in the backdrop of Regency era England, seen through the eyes of the powerful Bridgerton family.",
+      "popularity": 488.026,
+      "poster_url": "https://www.themoviedb.org/t/p/w1280/luoKpgVwi1E5nQsi7W0UuKHu2Rq.jpg",
+      "first_air_date": "2020-12-25",
+      "title": "Bridgerton",
+      "rating": 8.14,
+      "vote_count": 2715
+    },
+    {
+      "adult": false,
+      "backdrop_url": "https://www.themoviedb.org/t/p/w1280/vbz8B3pIrGjWKY6Y3OhUDVugHz8.jpg",
+      "genre_ids": [
+        9648,
+        18,
+        35
+      ],
+      "id": 693,
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_title": "Desperate Housewives",
+      "overview": "Looking down on her friends and family isn't a way of life for Mary Alice Young... it's a way of death. One day, in her perfect house, in the loveliest of suburbs, Mary Alice ended it all. Now she's taking us into the lives of her family, friends and neighbors, commenting from her elevated P.O.V.",
+      "popularity": 487.162,
+      "poster_url": "https://www.themoviedb.org/t/p/w1280/fToBWkwVNjYzH6mjrEq5JDYRoLx.jpg",
+      "first_air_date": "2004-10-03",
+      "title": "Desperate Housewives",
+      "rating": 7.932,
+      "vote_count": 1803
+    },
+    {
+      "adult": false,
+      "backdrop_url": "https://www.themoviedb.org/t/p/w1280/7w165QdHmJuTHSQwEyJDBDpuDT7.jpg",
+      "genre_ids": [
+        10759,
+        80,
+        18
+      ],
+      "id": 2288,
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_title": "Prison Break",
+      "overview": "Due to a political conspiracy, an innocent man is sent to death row and his only hope is his brother, who makes it his mission to deliberately get himself sent to the same prison in order to break the both of them out, from the inside out.",
+      "popularity": 447.97,
+      "poster_url": "https://www.themoviedb.org/t/p/w1280/5E1BhkCgjLBlqx557Z5yzcN0i88.jpg",
+      "first_air_date": "2005-08-29",
+      "title": "Prison Break",
+      "rating": 8.082,
+      "vote_count": 4912
+    },
+    {
+      "adult": false,
+      "backdrop_url": "https://www.themoviedb.org/t/p/w1280/vUuQzgCD9itDEb18HiFUZKvxo2m.jpg",
+      "genre_ids": [
+        80,
+        18
+      ],
+      "id": 253983,
+      "origin_country": [
+        "MX"
+      ],
+      "original_language": "es",
+      "original_title": "Las azules",
+      "overview": "In 1971, four women defy ultraconservative norms and join Mexico's first female police force—only to discover that it's a publicity stunt to distract the media from a serial killer. As the body count grows, they make a pact to bring the killer to justice.",
+      "popularity": 445.442,
+      "poster_url": "https://www.themoviedb.org/t/p/w1280/5JMYd2jYZGQ0KKcSQ8MH6k49XnF.jpg",
+      "first_air_date": "2024-07-30",
+      "title": "Women in Blue",
+      "rating": 7.8,
+      "vote_count": 5
+    },
+    {
+      "adult": false,
+      "backdrop_url": "https://www.themoviedb.org/t/p/w1280/iYQlpBH9RHmoDVcvGsvNpG3Ikx5.jpg",
+      "genre_ids": [
+        18,
+        80
+      ],
+      "id": 120549,
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_title": "Lady in the Lake",
+      "overview": "When the disappearance of a young girl grips the city of Baltimore in 1966, the lives of two women converge on a fatal collision course.",
+      "popularity": 437.228,
+      "poster_url": "https://www.themoviedb.org/t/p/w1280/cK0zAfFHfpSZJ5e9yhm2jRJJ6Zj.jpg",
+      "first_air_date": "2024-07-18",
+      "title": "Lady in the Lake",
+      "rating": 6.7,
+      "vote_count": 30
+    }
+  ]
 
-Movie.create(title: "The Shawshank Redemption", overview: "Framed in the 1940s for double murder, upstanding banker Andy Dufresne begins a new life at the Shawshank prison", poster_url: "https://image.tmdb.org/t/p/original/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg", rating: 8.7)
-
-Movie.create(title: "Titanic", overview: "101-year-old Rose DeWitt Bukater tells the story of her life aboard the Titanic.", poster_url: "https://image.tmdb.org/t/p/original/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg", rating: 7.9)
-
-Movie.create(title: "Ocean's Eight", overview: "Debbie Ocean, a criminal mastermind, gathers a crew of female thieves to pull off the heist of the century.", poster_url: "https://image.tmdb.org/t/p/original/MvYpKlpFukTivnlBhizGbkAe3v.jpg", rating: 7.0)
+  movies.each do |movie|
+    m = Movie.create(title: movie[:title], overview: movie[:overview], poster_url: movie[:poster_url], rating: movie[:rating])
+  end

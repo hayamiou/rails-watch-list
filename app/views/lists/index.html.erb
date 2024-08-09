@@ -5,7 +5,8 @@
     <h2>Movie Lists</h2>
   <ul class="list-cards">
     <% @lists.each do |list| %>
-      <li>
+      <li style="background-image: url('<%= cl_image_path list.photo.key, height: 300, crop: :fill%>')">
+
         <%= link_to list.name, list_path(list) %>
       </li>
     <% end %>
@@ -14,6 +15,3 @@
     </li>
   </ul>
 </main>
-
-
-<%# <li style="background-image: url('<%= cl_image_path list.photo.key, height: 300, crop: :fill %>'

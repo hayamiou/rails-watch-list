@@ -5,7 +5,6 @@ header {
   color: white;
   text-align: center;
   text-shadow: 5px 5px 5px #0E0000;
-  background-image: image-url("homepage_cover.jpg");
   background-size: cover;
   background-position: center;
   padding: 150px 20px;
@@ -41,10 +40,6 @@ main h2 {
     margin: 16px;
     background: transparent center/cover;
   }
-
-  li:nth-child(1) { background-image: image-url("drama_cover.jpg"); }
-  li:nth-child(2) { background-image: image-url("girls_cover.jpg"); }
-  li:nth-child(3) { background-image: image-url("comedy_cover.jpg"); }
 
   a {
     font-size: 1.5rem;
@@ -93,7 +88,3 @@ main h2 {
     text-shadow: 5px 5px 5px #0E0000;
   }
 }
-
-#list-drama { background-image: image-url("drama_cover.jpg"); }
-#list-girls-power { background-image: image-url("girls_cover.jpg"); }
-#list-comedy { background-image: image-url("comedy_cover.jpg"); }
